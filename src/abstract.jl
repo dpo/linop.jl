@@ -46,15 +46,16 @@ mutable struct LinearOperator{T, I<:Integer, F, Ft, Fct} <: AbstractLinearOperat
   nprod::I
   ntprod::I
   nctprod::I
+  args5::Bool
 end
 
 
 LinearOperator{T}(nrow::I, ncol::I, symmetric::Bool, hermitian::Bool, 
                   prod!::F, tprod!::Ft, ctprod!::Fct,
-                  nprod::I, ntprod::I, nctprod::I
+                  nprod::I, ntprod::I, nctprod::I, args5::Bool
                   ) where {T,I<:Integer,F,Ft,Fct} = LinearOperator{T,I,F,Ft,Fct}(nrow, ncol, symmetric, hermitian, 
                                                                                      prod!, tprod!, ctprod!,
-                                                                                     nprod, ntprod, nctprod)
+                                                                                     nprod, ntprod, nctprod, args5)
 
 LinearOperator{T}(
   nrow::I,
@@ -64,7 +65,7 @@ LinearOperator{T}(
   prod!,
   tprod!,
   ctprod!,
-) where {T,I<:Integer} = LinearOperator{T}(nrow, ncol, symmetric, hermitian, prod!, tprod!, ctprod!, 0, 0, 0)
+) where {T,I<:Integer} = LinearOperator{T}(nrow, ncol, symmetric, hermitian, prod!, tprod!, ctprod!, 0, 0, 0, true)
 
 nprod(op::AbstractLinearOperator) = op.nprod
 ntprod(op::AbstractLinearOperator) = op.ntprod

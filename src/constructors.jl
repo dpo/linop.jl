@@ -100,3 +100,20 @@ function LinearOperator(
 ) where {T, I<:Integer}
   LinearOperator{T}(nrow, ncol, symmetric, hermitian, prod!, tprod!, ctprod!)
 end
+
+export LinearOperator_3args
+function LinearOperator_3args(
+  ::Type{T},
+  nrow::I,
+  ncol::I,
+  symmetric::Bool,
+  hermitian::Bool,
+  prod!,
+  tprod! = nothing,
+  ctprod! = nothing,
+) where {T, I<:Integer}
+  prod5! = (res, v, α, β) -> prod!(res, v)
+  tprod5! = (tprod! == nothing) ? nothing : (res, u, α, β) -> tprod!(res, u)
+  ctprod5! = (ctprod! == nothing) ? nothing : (res, w, α, β) -> ctprod!(res, w)
+  LinearOperator{T}(nrow, ncol, symmetric, hermitian, prod5!, tprod5!, ctprod5!, 0, 0, 0, false)
+end

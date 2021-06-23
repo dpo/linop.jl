@@ -1,6 +1,12 @@
 import Base.+, Base.-, Base.*, LinearAlgebra.mul!
 
-function mul!(res::AbstractVector, op::AbstractLinearOperator{T}, v::AbstractVector, α, β) where T 
+function mul!(res::AbstractVector, op::AbstractLinearOperator{T}, v::AbstractVector, α, β) where T
+  if typeof(op) <: LBFGSOperator || typeof(op) <: LSR1Operator
+    args5 = false
+  else
+    args5 = (typeof(op) <: TimedLinearOperator) ? op.op.args5 : op.args5
+  end
+  args5 || (α == 1 && β == 0) || throw(LinearOperatorException("5-args product not defined"))
   (size(v, 1) == size(op, 2) && size(res, 1) == size(op, 1)) || throw(LinearOperatorException("shape mismatch"))
   increase_nprod(op)
   op.prod!(res, v, α, β)
