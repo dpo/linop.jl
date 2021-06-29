@@ -61,6 +61,8 @@ LSR1Operator{T}(
 ) where {T,I<:Integer,F,Ft,Fct} =
   LSR1Operator{T,I,F,Ft,Fct}(nrow, ncol, symmetric, hermitian, prod!, tprod!, ctprod!, inverse, data, 0, 0, 0)
 
+has_args5(op::LSR1Operator) = true
+
 """
     LSR1Operator(T, n; [mem=5, scaling=false)
     LSR1Operator(n; [mem=5, scaling=false)

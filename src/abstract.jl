@@ -75,6 +75,8 @@ increase_nprod(op::AbstractLinearOperator) = (op.nprod += 1)
 increase_ntprod(op::AbstractLinearOperator) = (op.ntprod += 1)
 increase_nctprod(op::AbstractLinearOperator) = (op.nctprod += 1)
 
+has_args5(op::LinearOperator) = op.args5
+
 """
   reset!(op)
 

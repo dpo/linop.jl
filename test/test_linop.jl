@@ -698,13 +698,15 @@ function test_linop()
     b = rand(10)
     prod! = (res, v) -> mul!(res, A, v)
     tprod! = (res, v) -> mul!(res, A', v)
-    opA = LinearOperator_3args(Float64, 10, 10, false, false, prod!, tprod!)
+    opA = LinearOperator_args3(Float64, 10, 10, false, false, prod!, tprod!)
     @test opA * b == A * b
     res = rand(10)
     mul!(res, opA, b)
     @test res == A * b
     α, β = 1.0, 3.0
     @test_throws LinearOperatorException mul!(res, opA, b, α, β)
+    mul!(res, opA', b)
+    @test res == A' * b
   end
 end
 
