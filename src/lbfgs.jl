@@ -77,6 +77,8 @@ LBFGSOperator{T}(
 ) where {T,I<:Integer,F,Ft,Fct} =
   LBFGSOperator{T,I,F,Ft,Fct}(nrow, ncol, symmetric, hermitian, prod!, tprod!, ctprod!, inverse, data, 0, 0, 0)
 
+has_args5(op::LBFGSOperator) = true
+
 """
     InverseLBFGSOperator(T, n, [mem=5; scaling=true])
     InverseLBFGSOperator(n, [mem=5; scaling=true])

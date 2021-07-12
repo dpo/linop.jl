@@ -14,6 +14,8 @@ TimedLinearOperator{T}(timer::TimerOutput, op::AbstractLinearOperator{T},
                        prod!::F, tprod!::Ft, ctprod!::Fct
                        ) where {T,F,Ft,Fct} = TimedLinearOperator{T,F,Ft,Fct}(timer, op, prod!, tprod!, ctprod!)
 
+has_args5(op::TimedLinearOperator) = op.op.args5
+
 """
     TimedLinearOperator(op)
 Creates a linear operator instrumented with timers from TimerOutputs.
